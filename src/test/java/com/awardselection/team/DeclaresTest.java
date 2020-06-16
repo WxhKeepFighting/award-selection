@@ -24,6 +24,6 @@ class DeclaresTest {
     @Test
     void testFindDeclaresById() {
         List<DeclaresDTO> declareById = mapper.findDeclareByCid(1);
-        System.out.println(declareById);
+        System.out.println(declareById+"111");
     }
 }
