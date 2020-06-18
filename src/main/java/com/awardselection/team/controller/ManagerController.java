@@ -25,8 +25,7 @@ public class ManagerController {
 
     @GetMapping("/login")
     public boolean checkManagerLogin(@RequestParam String account, @RequestParam String password) {
-        boolean flag = managerService.checkManagerLogin(account, password);
-        return flag;
+        return managerService.checkManagerLogin(account, password);
     }
 
     @GetMapping("/awards")

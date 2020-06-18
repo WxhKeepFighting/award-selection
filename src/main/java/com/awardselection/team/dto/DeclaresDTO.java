@@ -14,4 +14,5 @@ public class DeclaresDTO {
     private String aName;
     private String submission;
     private int status;
+    private String attachment;
 }

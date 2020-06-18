@@ -9,7 +9,14 @@ import org.apache.ibatis.annotations.Param;
 public interface DeclaresMapper {
 
 //    ------MY METHOD-----------
+
+    //查找指定公司申报的所有信息
     List<DeclaresDTO> findDeclareByCid(Integer id);
+
+    /**添加申报信息
+    //用户填的 String award申报奖项 ; String submission附加信息 ;String attachment 附件路径
+     **/
+
 
 //    ------MY METHOD-----------
 
