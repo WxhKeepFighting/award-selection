@@ -1,11 +1,16 @@
 package com.awardselection.team.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.awardselection.team.dto.DeclaresDTO;
+import com.awardselection.team.exception.AjaxResponse;
 import com.awardselection.team.model.Declares;
 import com.awardselection.team.service.DeclaresService;
+import com.awardselection.team.service.FileManagement;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,15 +22,29 @@ public class CompanyController {
     @Autowired
     DeclaresService declaresService;
 
+    @Autowired
+    FileManagement fileManagement;
+
+    // 查询指定申报信息
     @GetMapping("/findDeclareByCid")
-    public List<DeclaresDTO> declaresDTOS(@RequestParam Integer id) {
-        return declaresService.findDeclareByCid(id);
+    public ResponseEntity<List<DeclaresDTO>> declaresDTOS(@RequestParam Integer id) {
+        List<DeclaresDTO> declareByCid = declaresService.findDeclareByCid(id);
+        return ResponseEntity.status(HttpStatus.OK).body(declareByCid);
     }
 
+    // 添加申报信息
     @PostMapping("/addDeclare")
-    public int declaresAdd(@RequestBody Declares declares) {
-        return declaresService.addDeclare(declares);
+    public ResponseEntity<AjaxResponse> declaresAdd(@RequestBody Declares declares) {
+        declaresService.addDeclare(declares);
+        return ResponseEntity.status(HttpStatus.OK).body(AjaxResponse.success());
     }
 
+    // 文件上传
+    @PostMapping("/upload")
+    public ResponseEntity<JSONObject> uploadFile(@RequestParam("file")MultipartFile attachment) {
+        // 注意这里的参数名称是file！！！
+        JSONObject json = fileManagement.fileUpload(attachment);
+        return new ResponseEntity<>(json, HttpStatus.OK);
+    }
 
 }
