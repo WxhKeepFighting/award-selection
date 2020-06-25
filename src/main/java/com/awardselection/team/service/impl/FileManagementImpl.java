@@ -1,11 +1,8 @@
 package com.awardselection.team.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.awardselection.team.exception.AjaxResponse;
 import com.awardselection.team.service.FileManagement;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
