@@ -1,6 +1,5 @@
 package com.awardselection.team.service;
 
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -9,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Description:
  */
 public interface FileManagement {
-    JSONObject fileUpload(MultipartFile attachment);
-    JSONObject fileDownload();
+    String fileUpload(MultipartFile attachment);
+    // todo 缺少实现
+    String fileDownload();
 }

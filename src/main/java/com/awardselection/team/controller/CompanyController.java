@@ -34,17 +34,15 @@ public class CompanyController {
 
     // 添加申报信息
     @PostMapping("/addDeclare")
-    public ResponseEntity<AjaxResponse> declaresAdd(@RequestBody Declares declares) {
+    public ResponseEntity<AjaxResponse> declaresAdd(@RequestParam("file")MultipartFile file,
+                                                    @RequestParam("body") String declareStr
+                                                    ) {
+        String attachment = fileManagement.fileUpload(file);
+        Declares declares = JSONObject.parseObject(declareStr,Declares.class);
+        declares.setAttachment(attachment);
         declaresService.addDeclare(declares);
         return ResponseEntity.status(HttpStatus.OK).body(AjaxResponse.success());
     }
 
-    // 文件上传
-    @PostMapping("/upload")
-    public ResponseEntity<JSONObject> uploadFile(@RequestParam("file")MultipartFile attachment) {
-        // 注意这里的参数名称是file！！！
-        JSONObject json = fileManagement.fileUpload(attachment);
-        return new ResponseEntity<>(json, HttpStatus.OK);
-    }
 
 }

@@ -1,6 +1,5 @@
 package com.awardselection.team.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.awardselection.team.service.FileManagement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,17 +22,17 @@ public class FileManagementImpl implements FileManagement {
     private String pathname;
 
     @Override
-    public JSONObject fileUpload(MultipartFile attachment) {
-        JSONObject json = new JSONObject();
+    public String fileUpload(MultipartFile attachment) {
         if (attachment == null){
-            json.put("status","404");
-            json.put("message","上传文件为空");
-            return json;
+            return "error";
         }
         // 获取文件上传名
         String fileName = attachment.getOriginalFilename();
         // 获取后缀名
-        String subname = fileName.substring(fileName.lastIndexOf("."));
+        String subname = null;
+        if (fileName != null) {
+            subname = fileName.substring(fileName.lastIndexOf("."));
+        }
         // 时间格式化格式
         SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyyMMddHHmmssSSS");
         // 获取当前时间并作为时间戳
@@ -51,13 +50,11 @@ public class FileManagementImpl implements FileManagement {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        json.put("status","200");
-        json.put("path",pathname + newName);
-        return json;
+        return pathname + newName;
     }
 
     @Override
-    public JSONObject fileDownload() {
+    public String fileDownload() {
         return null;
     }
 }

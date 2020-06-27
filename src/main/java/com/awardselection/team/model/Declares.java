@@ -1,5 +1,8 @@
 package com.awardselection.team.model;
 
+import lombok.Data;
+
+@Data
 public class Declares {
     /**
      *

@@ -17,14 +17,19 @@ public class DeclaresServiceImpl implements DeclaresService {
 
     @Override
     public List<DeclaresDTO> findDeclareByCid(Integer id) {
-        List<DeclaresDTO> declareByCid = declaresMapper.findDeclareByCid(id);
-//        if (declareByCid.size()<=0) {
-//        }
-        return declareByCid;
+        // Todo 缺少异常的抛出
+        return declaresMapper.findDeclareByCid(id);
     }
 
     @Override
     public int addDeclare(Declares declares) {
-        return declaresMapper.insert(declares);
+        // Todo 缺少异常的抛出
+        int i = declaresMapper.insert(declares);
+        if (i>=1){
+            return declaresMapper.insert(declares);
+        } else {
+            return 0;
+        }
+
     }
 }
